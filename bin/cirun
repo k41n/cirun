@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'cirun'
+
+opts = Cirun::CLI.new.parse
+Cirun::Runner.new(opts).run
