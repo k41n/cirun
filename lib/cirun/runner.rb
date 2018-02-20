@@ -5,7 +5,8 @@ module Cirun
     end
 
     def run
-      cmd = "docker run -t -i --env RUBY=#{@opts.ruby} --env DB=#{@opts.db} --env REDMINE=#{@opts.redmine} --env PLUGIN=#{@opts.plugin} --env DEPENDENT=#{@opts.dependent} --env CODEPATH=#{`pwd`.chomp} redmineup/#{@opts.plugin} /root/run_for.sh"
+      ruby_short = @opts.ruby.split('-').first
+      cmd = "docker run --env RUBY_VERSION=ruby-#{ruby_short} --env DB=#{@opts.database} --env REDMINE=redmine-#{@opts.redmine} --env PLUGIN=#{@opts.plugin} --env DEPENDENT=#{@opts.dependent} --env CODEPATH=/plugin --mount type=bind,source=#{`pwd`.chomp},target=/var/www/ruby-#{ruby_short}/#{@opts.database}/redmine-#{@opts.redmine}/plugins/#{@opts.plugin} redmineup/#{@opts.plugin} /root/run_local.sh"
       puts "Running:\n#{cmd}"
       %x[ #{cmd} ]
     end

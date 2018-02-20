@@ -64,6 +64,7 @@ module Cirun
       puts "Database should be given and be one of #{database_list}" unless validate_database
       puts "Ruby should be given and be one of #{ruby_list}" unless validate_ruby
       puts "Redmine should be given and be one of #{redmine_list}" unless validate_redmine
+      exit -1
     end
 
     def enhance_options
